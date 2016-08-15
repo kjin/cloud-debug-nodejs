@@ -506,17 +506,8 @@ describe('v8debugapi', function() {
           var topFrame = bp.stackFrames[0];
           assert.ok(topFrame);
           assert.equal(topFrame['function'], 'foo');
-          if (semver.satisfies(process.version, '<1.6')) {
-            assert.equal(topFrame.arguments[0].name, 'n');
-            assert.equal(topFrame.arguments[0].value, '2');
-            assert.equal(topFrame.locals[0].name, 'A');
-            assert.equal(topFrame.locals[1].name, 'B');
-          } else {
-            assert.equal(topFrame.locals[0].name, 'n');
-            assert.equal(topFrame.locals[0].value, '2');
-            assert.equal(topFrame.locals[1].name, 'A');
-            assert.equal(topFrame.locals[2].name, 'B');
-          }
+          assert.equal(topFrame.arguments[0].name, 'n');
+          assert.equal(topFrame.arguments[0].value, '2');
           api.clear(bp);
           done();
         });
@@ -567,13 +558,8 @@ describe('v8debugapi', function() {
           var topFrame = bp.stackFrames[0];
           assert.ok(topFrame);
           assert.equal(topFrame['function'], 'foo');
-          if (semver.satisfies(process.version, '<1.6')) {
-            assert.equal(topFrame.arguments[0].name, 'n');
-            assert.equal(topFrame.arguments[0].value, '2');
-          } else {
-            assert.equal(topFrame.locals[0].name, 'n');
-            assert.equal(topFrame.locals[0].value, '2');
-          }
+          assert.equal(topFrame.arguments[0].name, 'n');
+          assert.equal(topFrame.arguments[0].value, '2');
           api.clear(bp);
           config.capture.maxFrames = oldMax;
           done();
@@ -601,13 +587,8 @@ describe('v8debugapi', function() {
 
           var topFrame = bp.stackFrames[0];
           assert.equal(topFrame['function'], 'foo');
-          if (semver.satisfies(process.version, '<1.6')) {
-            assert.equal(topFrame.arguments[0].name, 'n');
-            assert.equal(topFrame.arguments[0].value, '3');
-          } else {
-            assert.equal(topFrame.locals[0].name, 'n');
-            assert.equal(topFrame.locals[0].value, '3');
-          }
+          assert.equal(topFrame.arguments[0].name, 'n');
+          assert.equal(topFrame.arguments[0].value, '3');
 
           var watch = bp.evaluatedExpressions[0];
           assert.equal(watch.name, 'process');
@@ -821,13 +802,9 @@ describe('v8debugapi', function() {
           assert.ok(bp.stackFrames);
 
           var topFrame = bp.stackFrames[0];
-          if (semver.satisfies(process.version, '<1.6')) {
-            assert.equal(topFrame.arguments[0].name, 'n');
-            assert.equal(topFrame.arguments[0].value, '5');
-          } else {
-            assert.equal(topFrame.locals[0].name, 'n');
-            assert.equal(topFrame.locals[0].value, '5');
-          }
+          assert.equal(topFrame['function'], 'foo');
+          assert.equal(topFrame.arguments[0].name, 'n');
+          assert.equal(topFrame.arguments[0].value, '5');
           api.clear(bp);
           done();
         });
@@ -853,13 +830,8 @@ describe('v8debugapi', function() {
 
             var topFrame = bp.stackFrames[0];
             assert.equal(topFrame['function'], 'foo');
-            if (semver.satisfies(process.version, '<1.6')) {
-              assert.equal(topFrame.arguments[0].name, 'n');
-              assert.equal(topFrame.arguments[0].value, '3');
-            } else {
-              assert.equal(topFrame.locals[0].name, 'n');
-              assert.equal(topFrame.locals[0].value, '3');
-            }
+            assert.equal(topFrame.arguments[0].name, 'n');
+            assert.equal(topFrame.arguments[0].value, '3');
             api.clear(bp);
             done();
           });
@@ -898,14 +870,9 @@ describe('v8debugapi', function() {
             assert.ok(bp.stackFrames);
 
             var topFrame = bp.stackFrames[0];
-            if (semver.satisfies(process.version, '<1.6')) {
-              assert.equal(topFrame.arguments[0].name, 'j');
-              assert.equal(topFrame.arguments[0].value, '2');
-            } else {
-              assert.equal(topFrame.locals[0].name, 'j');
-              assert.equal(topFrame.locals[0].value, '2');
-            }
             assert.equal(topFrame['function'], 'foo');
+            assert.equal(topFrame.arguments[0].name, 'j');
+            assert.equal(topFrame.arguments[0].value, '2');
             api.clear(bp);
             done();
           });
